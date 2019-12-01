@@ -1,0 +1,51 @@
+<ion-header>
+  <ion-toolbar class="toolbar-color">
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>
+      Tiquetes
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+    <ion-row *ngIf="selectedTicket">
+        <ion-col>
+          <a style="color:#6200EE;">Editar Tiquete</a>
+          <div class="ticket-edit">
+              <ion-label>Nombre de Lider: {{selectedTicket.Nombre_Lider}}</ion-label>
+              <br>
+              <ion-label>Numero de Maquina: {{selectedTicket.Id_Maquina}}</ion-label>
+              <br>
+              <ion-label>Hora Apertura Ticket:{{selectedTicket.Hora_Apertura}}</ion-label>
+          </div>
+          <ion-item>
+              <ion-label>Causa</ion-label>
+              <ion-select placeholder="Seleccione Una" (ionChange)="causaSelect()" [(ngModel)]="seleccionCausa">
+                <ion-select-option *ngFor='let causa of listaCausas' value={{causa}}>{{causa}}</ion-select-option>
+              </ion-select>
+          </ion-item>
+          <br>
+          <ion-item>
+              <ion-label>Solucion</ion-label>
+              <ion-select placeholder="Seleccione Una" (ionChange)="solucionSelect()" [(ngModel)]="seleccionSolucion">
+                <ion-select-option *ngFor='let solucion of listaSoluciones' value={{solucion}}>{{solucion}}</ion-select-option>
+              </ion-select>
+          </ion-item>
+          <br>
+          <ion-item *ngIf="seleccionSolucion==otra">
+              <ion-label position="floating">Contraseña</ion-label>
+              <ion-input></ion-input>
+          </ion-item>
+          <ion-button size='small'>Cerrar Ticket</ion-button>
+          
+        </ion-col>
+      </ion-row>
+      <hr>
+  <ion-row class="ticket-box" *ngFor="let ticket of ticket">
+    <ion-col>
+      <ion-button class="button-color" (click)="onSelect(ticket)"> Maquina Numero: {{ticket.Id_Maquina}}</ion-button>
+    </ion-col>
+  </ion-row>
+</ion-content>
