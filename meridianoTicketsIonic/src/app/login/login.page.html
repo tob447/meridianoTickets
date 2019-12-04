@@ -12,7 +12,7 @@
             <ion-col>
                 <ion-item class="input-color">
                     <ion-label position="floating">Nombre de Usuario</ion-label>
-                    <ion-input></ion-input>
+                    <ion-input [(ngModel)]='username'></ion-input>
                 </ion-item>
             </ion-col>
         </ion-row>
@@ -21,14 +21,14 @@
             <ion-col>
                 <ion-item class="input-color">
                     <ion-label position="floating">Contraseña</ion-label>
-                    <ion-input type="password"></ion-input>
+                    <ion-input type="password" [(ngModel)]='password'></ion-input>
                 </ion-item>
             </ion-col>
         </ion-row>
 
         <ion-row id="button-box">
           <ion-col>
-            <ion-button class="button-color">Login</ion-button>
+            <ion-button class="button-color" (click)='login()'>Login</ion-button>
           </ion-col>
         </ion-row>
     </ion-grid>

@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
+    'meridianoTickets'
 ]
 
 MIDDLEWARE = [
@@ -76,8 +77,15 @@ WSGI_APPLICATION = 'meridianoTickets.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'sql_server.pyodbc',
+        'HOST': "192.168.1.207",
+        'USER':"SA",
+        'PASSWORD':"Qwerty.!",
+        'NAME':"Ensayos Meridiano",
+        'PORT':1433,
+        'OPTIONS':{
+            'driver':'ODBC Driver 17 for SQL Server'
+        }
     }
 }
 
@@ -119,3 +127,4 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 
 STATIC_URL = '/static/'
+AUTH_USER_MODEL='meridianoTickets.User'
