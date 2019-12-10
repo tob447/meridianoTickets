@@ -12,7 +12,7 @@ from django.contrib.auth.models import AbstractUser
 
 
 class Ct(models.Model):
-    ct = models.CharField(db_column='CT', max_length=50, blank=True, null=True)  # Field name made lowercase.
+    ct = models.CharField(unique=True,db_column='CT', max_length=50, blank=True, null=True)  # Field name made lowercase.
     descripcion = models.CharField(db_column='Descripcion', max_length=250, blank=True, null=True)  # Field name made lowercase.
     estado = models.IntegerField(db_column='Estado', blank=True, null=True)  # Field name made lowercase.
     razonparo_fk = models.IntegerField(db_column='RazonParo_fk', blank=True, null=True)  # Field name made lowercase.
@@ -32,6 +32,9 @@ class Ct(models.Model):
     totalenmaquina = models.IntegerField(db_column='TotalEnMaquina', blank=True, null=True)  # Field name made lowercase.
     detalleparoactual = models.TextField(db_column='DetalleParoActual', blank=True, null=True)  # Field name made lowercase.
     enmantenimiento = models.BooleanField(db_column='EnMantenimiento', blank=True, null=True)  # Field name made lowercase.
+
+    def __str__(self):
+        return 'Descripcion: '+ self.descripcion
 
     class Meta:
         db_table = 'CT'
@@ -66,27 +69,31 @@ class User(AbstractUser):
     USERNAME_FIELD='username'
     class Meta:
         db_table = 'usuarios'
-'''
-class User(AbstractUser):
-    id = models.IntegerField(blank=True, null=False,primary_key=True)
-    username = models.CharField(db_column='usuario', max_length=50, blank=True, null=True,unique=True)
-    email = models.CharField(max_length=50, blank=True, null=True)
-    password = models.CharField(db_column='pass', max_length=50, blank=True, null=True)  # Field renamed because it was a Python reserved word.
-    nivelacceso = models.IntegerField(db_column='nivelAcceso', blank=True, null=True)  # Field name made lowercase.
-    is_active = models.BooleanField(db_column='Activo', blank=True, null=True)  # Field name made lowercase.
-    correo = models.CharField(db_column='Correo', max_length=50, blank=True, null=True)  # Field name made lowercase.
-    cargo = models.CharField(db_column='Cargo', max_length=50, blank=True, null=True)  # Field name made lowercase.
 
-    # Apartir de aca son nuevos campos o campos modificados por mi
-    
-    telefono = models.CharField(max_length=15,null=True)
-    is_superuser=models.BooleanField(blank=True,null=True)
-    is_staff=models.BooleanField(blank=True,null=True)
-    last_login=models.DateTimeField(blank=True,null=True)
-    date_joined=models.DateField(blank=True,null=True)
-    
-    
-    first_name = models.CharField(db_column='Nombre', max_length=50, blank=True, null=True)
+class CodigosParos(models.Model):
+    codigo = models.CharField(max_length=50, blank=True, null=True)
+    descripcion = models.CharField(max_length=250, blank=True, null=True)
+    opsiguiente = models.BooleanField(db_column='OpSiguiente', blank=True, null=True)  # Field name made lowercase.
+    activo = models.BooleanField(db_column='Activo', blank=True, null=True)  # Field name made lowercase.
+    paros_grupos_fk = models.IntegerField(db_column='Paros_Grupos_fk', blank=True, null=True)  # Field name made lowercase.
+    oee = models.BooleanField(db_column='Oee', blank=True, null=True)  # Field name made lowercase.
+    disponibilidad = models.BooleanField(db_column='Disponibilidad', blank=True, null=True)  # Field name made lowercase.
+    eficiencia = models.BooleanField(db_column='Eficiencia', blank=True, null=True)  # Field name made lowercase.
+    paropreparacionproducto = models.BooleanField(db_column='ParoPreparacionProducto', blank=True, null=True)  # Field name made lowercase.
+    definicionparos = models.TextField(db_column='DefinicionParos', blank=True, null=True)  # Field name made lowercase.
+
+    def __str__(self):
+        return 'Descripcion: '+ self.descripcion    
+
+
     class Meta:
-        db_table = 'usuarios'
-'''
+        managed = False
+        db_table = 'Codigos_Paros'
+
+class Ticket(models.Model):
+    usuario=models.ForeignKey(User,to_field='username',on_delete=models.CASCADE)
+    maquinaId=models.OneToOneField("CT",to_field='ct',on_delete=models.CASCADE)
+    causa=models.ForeignKey(CodigosParos,on_delete=models.CASCADE,blank=True,null=True)
+    solucion=models.CharField(max_length=100,blank=True,null=True)
+    aperturaTicket=models.DateTimeField(auto_now_add=True,blank=True,null=True)
+    cierreTicket=models.DateTimeField(blank=True,null=True) 

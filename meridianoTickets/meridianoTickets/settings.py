@@ -38,7 +38,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
-    'meridianoTickets'
+    'meridianoTickets',
+    'rest_framework.authtoken'
 ]
 
 MIDDLEWARE = [
@@ -128,3 +129,10 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 AUTH_USER_MODEL='meridianoTickets.User'
+AUTHENTICATION_BACKENDS=['django.contrib.auth.backends.ModelBackend','meridianoTickets.costumAuth.MeridianoAuthenticate']
+REST_FRAMEWORK={
+    'DEFAULT_AUTHENTICATION_CLASSES':[
+        'rest_framework.authentication.TokenAuthentication'
+    ]
+    
+}

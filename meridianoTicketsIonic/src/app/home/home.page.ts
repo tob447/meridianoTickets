@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
-import {TICKETS} from '../mock-tiquets'
 import {Ticket} from '../ticket'
+import {GeneralService} from '../general.service'
+import { tick } from '@angular/core/testing';
 
 @Component({
   selector: 'app-home',
@@ -9,13 +10,24 @@ import {Ticket} from '../ticket'
 })
 export class HomePage {
 
-  ticket=TICKETS;
+  ticket:any;
   selectedTicket:Ticket;
   listaCausas=['daño molde','falla en las piezas']
   listaSoluciones=['reparacion molde','reinicio maquina','otra']
   seleccionCausa: string
   seleccionSolucion:string
-  constructor() {}
+  constructor(private generalService:GeneralService) {}
+
+  ngOnInit(){
+    console.log('Entro al init')
+    this.ticket=this.generalService.getTickets().subscribe(data=>{
+      this.ticket=data
+    })
+
+  }
+
+
+
   onSelect(ticket:Ticket):void{
     this.selectedTicket=ticket;
     console.log(this.selectedTicket)

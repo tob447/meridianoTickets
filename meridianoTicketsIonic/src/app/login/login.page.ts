@@ -19,12 +19,12 @@ export class LoginPage implements OnInit {
   }
 
   login(){
-    const loading=await this.loadingController.create({message:"Por favor espere verificando credenciales"})
-    await loading.present();
+
     let request=this.loginService.loginToApp(this.username,this.password).subscribe(data=>{
       if ('token' in data){
         this.token=data['token']
         this.navCtrl.navigateForward('/home')
+        this.loginService.token=data['token']
 
       }
       else{
@@ -32,11 +32,6 @@ export class LoginPage implements OnInit {
       }
 
     })
-
-  async presentLoading(){
-    const loading=await this.loadingController.create({message:"Por favor espere verificando credenciales"})
-
-    }
   }
 
 }

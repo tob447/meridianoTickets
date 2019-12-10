@@ -1,5 +1,7 @@
 {
   "name": "meridianoTicketsIonic",
-  "integrations": {},
+  "integrations": {
+    "cordova": {}
+  },
   "type": "angular"
 }

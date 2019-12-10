@@ -19,14 +19,19 @@ from django.urls import path
 from django.conf.urls import url, include
 from django.contrib.auth.models import User
 from rest_framework import routers
-from .views import UserViewSet
+from .views import UserViewSet,TicketViewSet,CodigosParosViewSet
+from meridianoTickets import views
+from rest_framework.authtoken import views
 
 router = routers.DefaultRouter()
 router.register(r'users', UserViewSet)
+router.register(r'ticket',TicketViewSet,'ticket')
+router.register(r'codigosparos',CodigosParosViewSet,'codigo_paros')
 
 urlpatterns = [
 
     url(r'^admin/', admin.site.urls),
-    url(r'^api/', include(router.urls))
+    url(r'^api/', include(router.urls)),
+    url(r'^api-token-auth/',views.obtain_auth_token)
     
 ]
