@@ -1,7 +1,8 @@
 {
   "name": "meridianoTicketsIonic",
   "integrations": {
-    "cordova": {}
+    "cordova": {},
+    "capacitor": {}
   },
   "type": "angular"
 }

@@ -46,7 +46,7 @@ deactivate () {
 # unset irrelevant variables
 deactivate nondestructive
 
-VIRTUAL_ENV="/Users/johnagudelo/Documents/meridianoTickets/meridianoTicketsENV"
+VIRTUAL_ENV="/home/tob447/Documents/meridianoTickets/meridianoTicketsENV"
 export VIRTUAL_ENV
 
 _OLD_VIRTUAL_PATH="$PATH"

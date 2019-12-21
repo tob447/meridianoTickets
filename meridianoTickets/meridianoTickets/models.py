@@ -97,3 +97,4 @@ class Ticket(models.Model):
     solucion=models.CharField(max_length=100,blank=True,null=True)
     aperturaTicket=models.DateTimeField(auto_now_add=True,blank=True,null=True)
     cierreTicket=models.DateTimeField(blank=True,null=True) 
+    estaCerrado=models.BooleanField(blank=True)

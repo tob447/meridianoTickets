@@ -17,4 +17,5 @@ class CodigosParosSerializer(serializers.ModelSerializer):
     class Meta:
         model=CodigosParos
         fields='__all__'
+
     

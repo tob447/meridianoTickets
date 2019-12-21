@@ -1,7 +1,9 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from '@angular/common/http'
+import {HTTP} from '@ionic-native/http/ngx'
+import {Platform} from '@ionic/angular'
 
-const loginApiUrl='http://127.0.0.1:8000/api-token-auth/'
+const loginApiUrl='http://192.168.1.189:8000/api-token-auth/'
 
 @Injectable({
   providedIn: 'root'
@@ -9,11 +11,19 @@ const loginApiUrl='http://127.0.0.1:8000/api-token-auth/'
 export class LoginService {
   token:string
 
-  constructor(private httpClient:HttpClient) { }
+  constructor(private httpClient:HttpClient,private http:HTTP,private platform:Platform) { }
 
   loginToApp(user:string,password:string){
     let request={"username":user,"password":password}
-    console.log(request)
+
+    return this.http.post(loginApiUrl,request,{})
+
+
+
+  }
+  loginToAppWeb(user:string,password:string){
+
+    let request={"username":user,"password":password}
     return this.httpClient.post(loginApiUrl,request)
 
   }

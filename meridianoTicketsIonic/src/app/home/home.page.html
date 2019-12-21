@@ -1,51 +1,45 @@
 <ion-header>
   <ion-toolbar class="toolbar-color">
-    <ion-buttons slot="start">
-      <ion-menu-button></ion-menu-button>
-    </ion-buttons>
-    <ion-title>
+    <ion-title id="title">
       Tiquetes
     </ion-title>
+
+    <ion-buttons slot="end">
+        <ion-icon (click)="logOut()" name="exit"></ion-icon>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-    <ion-row *ngIf="selectedTicket">
+    <ion-row *ngIf="selectedTicket" [hidden]="isHidden">
         <ion-col>
           <a style="color:#6200EE;">Editar Tiquete</a>
           <div class="ticket-edit">
-              <ion-label>Nombre de Lider: {{selectedTicket.Nombre_Lider}}</ion-label>
+              <ion-label>Nombre de Lider: {{selectedTicket.usuario}}</ion-label>
               <br>
-              <ion-label>Numero de Maquina: {{selectedTicket.Id_Maquina}}</ion-label>
+              <ion-label>Numero de Maquina: {{selectedTicket.maquinaId}}</ion-label>
               <br>
-              <ion-label>Hora Apertura Ticket:{{selectedTicket.Hora_Apertura}}</ion-label>
+              <ion-label>Hora Apertura Ticket:{{selectedTicket.aperturaTicket}}</ion-label>
           </div>
           <ion-item>
               <ion-label>Causa</ion-label>
-              <ion-select placeholder="Seleccione Una" (ionChange)="causaSelect()" [(ngModel)]="seleccionCausa">
-                <ion-select-option *ngFor='let causa of listaCausas' value={{causa}}>{{causa}}</ion-select-option>
+              <ion-select class="causaSelect" placeholder="Seleccione Una" name="causa" ngDefaultControl [(ngModel)]="seleccionCausa">
+                  <ion-select-option  *ngFor='let causa of listaCausas' value={{causa.id}}>{{causa.descripcion}}</ion-select-option>
               </ion-select>
           </ion-item>
           <br>
           <ion-item>
-              <ion-label>Solucion</ion-label>
-              <ion-select placeholder="Seleccione Una" (ionChange)="solucionSelect()" [(ngModel)]="seleccionSolucion">
-                <ion-select-option *ngFor='let solucion of listaSoluciones' value={{solucion}}>{{solucion}}</ion-select-option>
-              </ion-select>
+              <ion-label position="floating">Solucion</ion-label>
+              <ion-input [(ngModel)]='seleccionSolucion' name="solucion" ngDefaultControl></ion-input>
           </ion-item>
-          <br>
-          <ion-item *ngIf="seleccionSolucion==otra">
-              <ion-label position="floating">Contraseña</ion-label>
-              <ion-input></ion-input>
-          </ion-item>
-          <ion-button size='small'>Cerrar Ticket</ion-button>
+          <ion-button (click)="cerrarTicket()" size='small'>Cerrar Ticket</ion-button>
           
         </ion-col>
       </ion-row>
       <hr>
   <ion-row class="ticket-box" *ngFor="let ticket of ticket">
     <ion-col>
-      <ion-button class="button-color" (click)="onSelect(ticket)"> Maquina Numero: {{ticket.Id_Maquina}}</ion-button>
+      <ion-button expand="block" size='small' *ngIf="ticket.estaCerrado==false" class="button-color" (click)="onSelect(ticket)"> Maquina Numero: {{ticket.maquinaId}}</ion-button>
     </ion-col>
   </ion-row>
 </ion-content>

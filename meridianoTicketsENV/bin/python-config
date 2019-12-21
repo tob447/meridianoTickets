@@ -1,4 +1,4 @@
-#!/Users/johnagudelo/Documents/meridianoTickets/meridianoTicketsENV/bin/python
+#!/home/tob447/Documents/meridianoTickets/meridianoTicketsENV/bin/python
 
 import sys
 import getopt

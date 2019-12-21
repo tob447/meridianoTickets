@@ -1,0 +1,5 @@
+Django=2.1
+pyodbc
+django-mssql-backend
+djangorestframework
+markdown

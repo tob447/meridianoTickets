@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">meridiano-tickets</string>
+    <string name="title_activity_main">meridiano-tickets</string>
+    <string name="package_name">com.meridiano.meridianotickets</string>
+    <string name="custom_url_scheme">com.meridiano.meridianotickets</string>
+</resources>

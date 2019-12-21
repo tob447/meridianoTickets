@@ -7,7 +7,7 @@ from rest_framework import status
 from rest_framework.decorators import api_view
 import boto3
 from django.shortcuts import get_object_or_404
-import time
+import datetime
 from rest_framework.permissions import IsAuthenticated
 
 class UserViewSet(viewsets.ModelViewSet):
@@ -15,8 +15,8 @@ class UserViewSet(viewsets.ModelViewSet):
     queryset = User.objects.all()
     serializer_class = UserSerializer
 
-class TicketViewSet(viewsets.ModelViewSet):
-    permission_classes=(IsAuthenticated,)
+class TicketViewSet(viewsets.ViewSet):
+    #permission_classes=(IsAuthenticated,)
     serializer_class=TicketSerializer
     queryset=CodigosParos.objects.all()
     def create(self,request):
@@ -43,6 +43,19 @@ class TicketViewSet(viewsets.ModelViewSet):
         queryset=Ticket.objects.all()
         serializer=TicketSerializer(queryset,many=True,context={'request': request})
         return Response(serializer.data)
+
+    def put(self,request):
+        instance=Ticket.objects.get(pk=str(request.data.get('id')))
+        codigosParos=CodigosParos.objects.get(pk=str(request.data.get('causa')))
+        instance.causa=codigosParos
+        instance.solucion=request.data.get('solucion')
+        instance.estaCerrado=True
+        instance.cierreTicket=datetime.datetime.now()
+        instance.save()
+
+        serializer=TicketSerializer(instance)
+        return Response(serializer.data)
+
 
 
 class CodigosParosViewSet(viewsets.ModelViewSet):

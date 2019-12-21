@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "756872120435",
+    "firebase_url": "https://meridiano-tickets.firebaseio.com",
+    "project_id": "meridiano-tickets",
+    "storage_bucket": "meridiano-tickets.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:756872120435:android:d396544ad0768e80034206",
+        "android_client_info": {
+          "package_name": "io.ionic.starter"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "756872120435-d199r64d3kjulqna7cg6prr16pud4nim.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB-XhzRRPS4bFjiCA_sFEclNOoDsHAs9sU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "756872120435-d199r64d3kjulqna7cg6prr16pud4nim.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
