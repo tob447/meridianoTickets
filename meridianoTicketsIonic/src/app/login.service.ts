@@ -3,7 +3,7 @@ import {HttpClient} from '@angular/common/http'
 import {HTTP} from '@ionic-native/http/ngx'
 import {Platform} from '@ionic/angular'
 
-const loginApiUrl='http://192.168.1.189:8000/api-token-auth/'
+const loginApiUrl='http://192.168.1.170:8000/api-token-auth/'
 
 @Injectable({
   providedIn: 'root'

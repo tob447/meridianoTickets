@@ -5,8 +5,8 @@ import {LoginService} from './login.service'
 import {HttpHeaders} from '@angular/common/http'
 import {Codigo} from './ticket'
 
-const ticketsUrl='http://192.168.1.189:8000/api/ticket/'
-const codigosUrl='http://192.168.1.189:8000/api/codigosparos/'
+const ticketsUrl='http://192.168.1.170:8000/api/ticket/'
+const codigosUrl='http://192.168.1.170:8000/api/codigosparos/'
 
 
 @Injectable({
